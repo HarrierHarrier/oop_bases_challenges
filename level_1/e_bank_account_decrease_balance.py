@@ -10,8 +10,27 @@
 
 
 class BankAccount:
-    pass  # код писать тут
+    def __init__(self, owner_full_name: str, balance: float):
+        self.owner_full_name = owner_full_name
+        self.balance = balance
+
+    def increase_balance(self, income: float):
+        self.balance += income
+
+    def decrease_balance(self, spending: float):
+        result = self.balance - spending
+        if result < 0:
+            raise ValueError("Spending cannot exceed current balance.")
+        self.balance = result
 
 
 if __name__ == '__main__':
-    pass  # код писать тут
+    account = BankAccount(
+        owner_full_name='Daniel A. Enaorch',
+        balance=10500000.0
+    )
+    account.decrease_balance(1e7)
+    print(f"Balance: {account.balance}")
+
+    account.decrease_balance(7e5)
+    print(f"Balance: {account.balance}")
